@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from bda.plone.cart import get_item_data_provider
@@ -209,7 +212,10 @@ class CartItemDiscount(DiscountBase):
     def net(self, net, vat, count):
         # net discount for one item.
         # XXX: from gross
+        # CUSTOM
         net = Decimal(net)
+        if count == 0:
+            return 0
         item_discount = net - self.apply_rules(net * count, count) / count
         return item_discount
 
